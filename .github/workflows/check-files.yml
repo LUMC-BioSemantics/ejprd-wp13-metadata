@@ -1,0 +1,33 @@
+name: Check files
+
+on:
+  pull_request:
+    branches: [ main ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      # Setup python 3.8
+      - name: Setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      # Extact config file
+      - name: print body
+        uses: jitterbit/get-changed-files@v1
+        id: new-resource
+        with:
+          format: space-delimited
+          #token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Printing
+        run: |
+          echo "All:"
+          echo "${{ steps.new-resource.outputs.all }}"
+          echo "Added:"
+          echo "${{ steps.new-resource.outputs.added }}"
+          echo "Modified:"
+          echo "${{ steps.abc.new-resource.modified }}"
