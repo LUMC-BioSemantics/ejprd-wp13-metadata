@@ -22,7 +22,7 @@ jobs:
         id: fc
         with:
           issue-number: 1
-          body-includes: catalog_url:
+          body-includes: search string 1
       - run: |
           echo ${{ steps.fc.outputs.comment-id }}
           echo ${{ steps.fc.outputs.comment-body }}
