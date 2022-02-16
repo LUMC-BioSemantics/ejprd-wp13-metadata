@@ -1,7 +1,7 @@
 name: Populate WP13 FDP
 
 on:
-  push:
+  pull_request:
     branches: [ main ]
 
   workflow_dispatch:
