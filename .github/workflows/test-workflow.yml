@@ -22,7 +22,7 @@ jobs:
         id: new-resource
         with:
           format: space-delimited
-          token: ${{ secrets.GITHUB_TOKEN }}
+          #token: ${{ secrets.GITHUB_TOKEN }}
       - name: Printing
         run: |
           echo "All:"

@@ -10,24 +10,18 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      # Setup python 3.8
-      - name: Setup python
-        uses: actions/setup-python@v2
+      - name: checkout
+        uses: actions/checkout@v2
         with:
-          python-version: 3.8
-      # Extact config file
-      - name: print body
-        uses: jitterbit/get-changed-files@v1
-        id: new-resource
-        with:
-          format: space-delimited
-          #token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Printing
+          fetch-depth: 0
+      - name: get changed files
+        id: getfile
         run: |
-          echo "All:"
-          echo "${{ steps.new-resource.outputs.all }}"
-          echo "Added:"
-          echo "${{ steps.new-resource.outputs.added }}"
-          echo "Modified:"
-          echo "${{ steps.abc.new-resource.modified }}"
+          echo "::set-output name=files::$(git diff-tree --no-commit-id --name-only -r ${{ github.sha }}| xargs)"
+
+      - name: echo the changed files
+        run: |
+          for i in ${{ steps.getfile.outputs.files }}
+          do
+              echo $i
+          done
