@@ -34,7 +34,7 @@ jobs:
           path: "fdp-populator/requirements.txt"
       # run script
       - name: Check script files exits
-        working-directory: ./fdp-populator/script
+        working-directory: ./fdp-populator/scripts
         env:
           BASE_PATH: "../../"
           FDP_URL: ${{ secrets.FDP_URL }}
