@@ -1,0 +1,45 @@
+name: Populate FDP
+
+on:
+  push:
+    branches: [ main ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      # List files
+      - name: List repo content
+        run: ls
+      # checkout fdp populator repository
+      - uses: actions/checkout@v2
+        with:
+          repository: rajaram5/fdp-populator
+          path: fdp-populator
+      # List files
+      - name: List fdp-populator repo content
+        run: ls
+      # install python
+      - name: Install python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+      # install python dependencies
+      - name: Install dependency
+        uses: py-actions/py-dependency-install@v2
+        with:
+          path: "fdp-populator/requirements.txt"
+      # run script
+      - name: Check script files exits
+        working-directory: ./fdp-populator/script
+        env:
+          BASE_PATH: "../../"
+          FDP_URL: ${{ secrets.FDP_URL }}
+          FDP_PERSISTENT_URL: ${{ secrets.FDP_PERSISTENT_URL }}
+          FDP_USERNAME: ${{ secrets.FDP_USERNAME }}
+          FDP_PASSWORD: ${{ secrets.FDP_PASSWORD }}
+          CONFIG_FILE: "../../config.yml"
+        run: 'python main.py'
