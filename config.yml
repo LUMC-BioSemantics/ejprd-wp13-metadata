@@ -1,4 +1,4 @@
 catalog_url: "https://w3id.org/ejp-rd/fairdatapoints/wp13/catalog/bf209b8a-eb67-4f35-864f-6d02228e1d91"
-dataset_file: "Hungtington_microarray/datasets.csv"
-distribution: "Hungtington_microarray/distributions.csv"
+dataset_file: "Hungtington-resource-2/datasets.csv"
+distribution: "Hungtington-resource-2/distributions.csv"
 
